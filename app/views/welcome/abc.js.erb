@@ -1,0 +1,4 @@
+$('#comments').empty();
+<%@comments.each do |comment|%>
+	$('#comments').append("<option><%=comment%></option>");
+<%end%>

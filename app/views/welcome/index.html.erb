@@ -1,0 +1,106 @@
+<!-- <div class="row">
+	<div class="col-md-12">
+		<div class="text-center"><u><h1><%=@text%></h1></u></div>
+	</div>
+</div>
+<%=link_to "Create new Post",new_post_path, class: "btn btn-sm btn-primary"%>
+<%=link_to "View all Post",posts_path, class: "btn btn-sm btn-info"%>
+<%= link_to "Use Calculator", new_calci_path, class: "btn btn-sm btn-default"%>
+<%=button_tag "RESULT1", class: "btn btn-success", id: "result1"%>
+<%=button_tag "RESULT2", id: "result2"%>
+<%=button_tag "RESULT3", id: "result3"%> -->
+
+<div class="welcome_page">
+	<div class="top_margin">
+		<h1 class="text-center">FORM</h1>
+		<div class="row">
+			<div class='col-md-6'>
+				<%=form_tag nimisha_path, method: :POST,class: "form-horizontal"  do %>
+					<div class="form-group">
+						<%=label_tag :username,"Username :", class: "col-md-4 control-label custom_label" %>
+						<div class="col-md-8">
+							<%=text_field_tag :username,"", class: "custom_text", placeholder: "Enter username"%>
+						</div>	
+					</div>
+					<div class="form-group">
+						<%=label_tag :email,"Email:", class: "col-md-4 control-label custom_label"%>
+						<div class="col-md-8">
+							<%=text_field_tag :email, "", class: "custom_text", placeholder: "Enter email"%>
+						</div>
+					</div>
+					<div class="form-group">
+						<%=label_tag :password,"Password:", class: "col-md-4 control-label custom_label"%>
+						<div class="col-md-8">
+							<%=text_field_tag :password, "", class: "custom_text", placeholder: "Enter password"%>
+						</div>
+					</div>
+					<div class="form-group">
+						<%=label_tag :confirm_password,"Confirm Password:", class: "col-md-4 control-label custom_label"%>
+						<div class="col-md-8">
+							<%=text_field_tag :confirm_password, "", class: "custom_text", placeholder: "Confirm Password"%>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-md-4 col-md-offset-1">
+							<%=select_tag "actions", options_for_select(["yes","no"]),class: "form-control", prompt: "--Select--"%>
+						</div>
+						<div class="col-md-7">
+							<%=submit_tag "SUBMIT", class: "custom_submit"%>
+						</div>
+					</div>	
+				<%end%>
+			</div>	
+			<div class='col-md-6'>
+				<div class="col-md-5 col-md-offset-1">
+					Post<%=select_tag "posts", options_for_select(Post.pluck(:id)),class: "form-control", prompt: "-Select Post-"%>
+				</div>
+				<div class="col-md-5 col-md-offset-1">
+					Comment<%=select_tag "comments", "",class: "form-control", prompt: "--Select--"%>
+				</div>
+				<br>
+				<br>
+				<br>
+				<br>
+				<div class='col-md-5 col-md-offset-1'>
+					 Posts<%=select_tag "post_body", options_for_select(Post.pluck(:id)),class: "form-control", prompt: "-Select post-"%>
+				</div>
+				<div class="col-md-5 col-md-offset-1">
+					Comment's Body<%=select_tag "body", "", class: "form-control", prompt: "--Select--"%>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>	
+<div class="top-margin content-section hidden">
+	<div class="col-md-2">
+	Username:
+	</div>
+	<div class="col-md-10 f1">
+	na
+	</div>
+	<div class="col-md-2">
+	Email:
+	</div>
+	<div class="col-md-10 f2">
+	na
+	</div>
+	<div class="col-md-2">
+	Password:
+	</div>
+	<div class="col-md-10 f3">
+	na
+	</div>
+	<div class="col-md-2">
+	Confirm Password:
+	</div>
+	<div class="col-md-10 f4">
+	na
+	</div>
+	<div class="col-md-2">
+	Full Text:
+	</div>
+	<div class="col-md-10 f5">
+	na
+	</div>
+</div>

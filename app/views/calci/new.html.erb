@@ -1,0 +1,35 @@
+<div class="top-margin">
+	<h1 class="text-center">CALCULATOR</h1>
+	<%=form_tag new_calci_path, method: :GET,class: "form-horizontal"  do %>
+		<div class="form-group">
+			<%=label_tag :number1,"Number-1 :", class: "col-md-2 control-label" %>
+			<div class="col-md-10">
+				<%=text_field_tag :number1,"", class: "form-control", placeholder: "Enter first number"%>
+			</div>	
+		</div>
+		<div class="form-group">
+			<%=label_tag :number2,"Number-2:", class: "col-md-2 control-label"%>
+			<div class="col-md-10">
+				<%=text_field_tag :number2, "", class: "form-control", placeholder: "Enter second number"%>
+			</div>
+		</div>
+		<div class="col-sm-offset-2 col-sm-10">
+			<%=submit_tag "RESULT", class: "btn btn-success"%>
+		</div>
+	<%end%>
+</div>
+<%if @sum %>
+	<h1 class="text-center font" > The result is :</h1>
+	<br>
+	The addition of <%=@num1%> and <%=@num2%> is:      <%=@sum%> 
+	<br>
+	The subraction of <%=@num1%> and <%=@num2%> is:    <%=@sub%>
+	<br>
+	The multiplication of  <%=@num1%> and <%=@num2%> is:      <%=@multi%>
+	<br>
+	The division of <%=@num1%> and <%=@num2%> is:       <%=@divi%>
+	<br>
+	The average of <%=@num1%> and <%=@num2%> is:           <%=@avg%>
+<%end%>
+<br>
+<%= link_to "BACK", :back%>

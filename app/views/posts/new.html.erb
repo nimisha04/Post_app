@@ -1,0 +1,40 @@
+<div >
+<div class="top-margin">
+	<h1 class="text-center"><u>CREATE NEW POST</u></h1>
+	<div class="col-md-12">
+		<%=form_for @post, html:{class: "form-horizontal", multipart: true} do |f|%>
+			<div class="form-group">
+				<%=f.label :email, class: "col-md-1"%>
+				<div class="col-md-11">
+					<%=f.text_field :email, class: "form-control", placeholder: "Enter your Email"%>
+				</div>
+			</div>
+			<div class="form-group">
+				<%=f.label :title, class: "col-md-1"%>
+				<div class="col-md-11">
+					<%=f.text_field :title, class: "form-control", placeholder: "Enter post title"%>
+				</div>
+			</div>
+			<div class="form-group">
+				<%=f.label :body, class: "col-md-1"%>
+				<div class="col-md-11">
+					<%=f.text_area :body, class: "form-control", placeholder: "Enter post body"%>
+				</div>
+			</div>
+			<div class="form-group">
+				<%=f.label :image, class: "col-md-1"%>
+				<div class="col-md-11">
+					<%=f.file_field :image%>
+				</div>
+			</div>
+			<div class="form-group">
+				<%=f.label :attachment, class: "col-md-1"%>
+				<div class="col-md-11">
+					<%=f.file_field :attachment%>
+				</div>
+			</div>
+			<div class="col-sm-offset-1 col-sm-11">
+				<%=f.submit "Create New Post", class: "btn btn-success"%>
+			</div>
+		<%end%>
+	</div>

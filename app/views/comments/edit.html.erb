@@ -1,0 +1,17 @@
+<h1 class="text-center">EDIT COMMENT FORM</h1>
+Comment:
+		<br>
+		<br>
+		<%=form_for [@post,@comment], html:{class: "form-horizontal"} do |f|%>
+			<div class="form-group">
+				<div class="col-md-10">			
+					<%=f.text_area :body, class: "form-control"%>
+					
+				</div>
+
+		 		<div class=" col-sm-2">
+					<%=f.submit "UPDATE COMMENT", class: "btn btn-success"%>
+				</div>
+		 	</div>
+		<%end%>
+		<%= link_to "BACK", :back%>

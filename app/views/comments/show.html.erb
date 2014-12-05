@@ -1,0 +1,6 @@
+<h1> Comment is:</h1>
+COMMENT: <%=@comment.body%>
+<br>
+<i><%=time_ago_in_words(@comment.created_at)%> ago</i>
+<br>
+<%= link_to "BACK", :back%>

@@ -1,0 +1,47 @@
+<h1 class="text-center"> Your created post is:</h1>
+<%if @post.image.present?%>
+	<%=image_tag @post.image.large_thumb.url%>
+<%else%>
+	<%= image_tag "default.png", width:"1100", height: "249"%>
+<%end%>
+<br>
+<%if @post.attachment.present?%>
+	Attachment: <%= link_to @post.attachment_identifier, @post.attachment.url%>
+<%else%>
+	Attachment: <%="No Attachment"%>
+<%end%>
+<br>
+EMAIL: <%=@post.email%>
+<br>
+TITLE: <%=@post.title%>
+<br>
+BODY: <%= @post.body%>
+<br>
+CREATED AT: <%=time_ago_in_words(@post.created_at)%> ago
+<br>
+UPDATED AT: <%=time_ago_in_words(@post.updated_at)%> ago
+<br>
+Comment:
+<br>
+		<%=form_for [@post,@comment], html:{class: "form-horizontal"} do |f|%>
+			<div class="form-group">
+				<div class="col-md-10">			
+					<%=f.text_area :body, class: "form-control", placeholder: "Type your comment"%>
+					<%=f.hidden_field :from_page, value:"show"%>
+				</div>
+
+		 		<%=f.submit "Comment", class: "btn btn-success col-md-2"%>
+		 	</div>
+		<%end%>
+				<br>
+		<% if @post.comments.count >0 %>
+			<%@post.comments.where.not(body:nil).order('created_at DESC').each do |comment|%>
+		 		<%=comment.body%>
+		 		<br>
+		    	<i><%=time_ago_in_words(comment.created_at)%> ago</i>
+			 	<hr>			 	
+			<%end%>
+		<%end%>
+
+
+<%= link_to "BACK", :back%>

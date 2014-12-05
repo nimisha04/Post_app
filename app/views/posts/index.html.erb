@@ -1,0 +1,133 @@
+<div class="top-margin">
+	<h1 class="text-center"><u>CREATE NEW POST</u></h1>
+	<div class="col-md-12">
+		<%=form_for @post, html:{class: "form-horizontal", multipart: true} do |f|%>
+			<div class="form-group">
+				<%=f.label :email, class: "col-md-1"%>
+				<div class="col-md-11">
+					<%=f.text_field :email, class: "form-control", placeholder: "Enter your Email"%>
+				</div>
+			</div>
+			<div class="form-group">
+				<%=f.label :title, class: "col-md-1"%>
+				<div class="col-md-11">
+					<%=f.text_field :title, class: "form-control", placeholder: "Enter post title"%>
+				</div>
+			</div>
+			<div class="form-group">
+				<%=f.label :body, class: "col-md-1"%>
+				<div class="col-md-11">
+					<%=f.text_area :body, class: "form-control", placeholder: "Enter post body"%>
+				</div>
+			</div>
+			<div class="form-group">
+				<%=f.label :image, class: "col-md-1"%>
+				<div class="col-md-11">
+					<%=f.file_field :image%>
+				</div>
+			</div>
+			<div class="form-group">
+				<%=f.label :attachment, class: "col-md-1"%>
+				<div class="col-md-11">
+					<%=f.file_field :attachment%>
+				</div>
+			</div>
+			<div class="col-sm-offset-1 col-sm-11">
+				<%=f.submit "Create New Post", class: "btn btn-success"%>
+			</div>
+		<%end%>
+	</div>
+	<br>
+	<br>
+
+	<h1 class="text-center"><i>All the  created posts are........</i></h1>
+	<%@posts.each do |post|%>
+		<div class="col-md-12">
+			<%if post.image.present?%>
+				<%= image_tag post.image.thumb.url%>
+			<%else%>
+				<%= image_tag "default.png", width:"100", height: "100"%>
+			<%end%>
+		</div>
+		<br>
+		<div class="col-md-12">
+			Attachment:
+			<%if post.attachment.present?%>
+			 	<%= link_to post.attachment_identifier, post.attachment.url%>
+			<%else%>
+			 	<%="No Attachment"%>
+			<%end%>
+			<br>
+			EMAIL: <%=post.email%>
+			<br>
+			TITLE: <%= post.title%>
+			<br>
+			BODY: <%= post.body%>
+			<br>
+			<i><%=time_ago_in_words(post.created_at)%> ago</i>
+			<br>
+				<%=link_to "SHOW POST",post_path(post.id), class: "btn btn-primary btn-xs"%>
+			  	<%=link_to "EDIT POST",edit_post_path(post.id), class: "btn btn-info btn-xs"%>
+			  	<%= link_to "DELETE POST", post_path(post.id), method: :DELETE, data: {confirm:"Are you sure you want to DELETE it???"}, class: "btn btn-default btn-xs"%>
+			 <br>
+		</div>
+		<div class="col-md-12">
+			 Comment:
+
+			<%=form_for [post,post.comments.new], html:{class: "form-horizontal"}, remote:true do |f|%>
+				<div class="form-group">
+					<div class="col-md-10">			
+						<%=f.text_area :body, class: "form-control", placeholder: "Type your comment"%>
+						<%=f.hidden_field :from_page, value:"index"%>
+					</div>
+
+			 		<%=f.submit "Comment", class: "btn btn-success col-md-2"%>
+			 	</div>
+			<%end%>
+			<% if post.comments.count>0 %>
+				<div class="comment-sector<%=post.id%>">
+					<%post.comments.where.not(body:nil).order('created_at DESC').each do |comment|%>
+				 		<div class= "col-md-6"> <%=comment.body%></div>
+				 		 <div class= "col-md-6">
+				 		 	<%=link_to "SHOW COMMENT",post_comment_path(post.id,comment.id), class: "btn btn-primary btn-xs"%>
+				 		 	<%=link_to "EDIT COMMENT",edit_post_comment_path(post.id,comment.id), class: "btn btn-info btn-xs"%>
+				  			<%= link_to "DELETE COMMENT", post_comment_path(post.id,comment.id), method: :DELETE, data: {confirm:"Are you sure you want to DELETE it???"}, class: "btn btn-default btn-xs"%>	
+				  		</div>
+
+				 		 <br>
+				 		 <div class= "col-md-6">
+				 		 <i><%=time_ago_in_words(comment.created_at)%> ago</i>
+				 		 </div>
+				 		 <hr>	 	
+					<%end%>
+				</div>
+			<%end%>
+
+			<hr>
+		
+		</div>
+	<%end%>
+
+	<table class="table table-hover table-responsive">
+	  	<thead>
+		  	<tr>
+		  		<th>EMAIL</th><th> TITLE</th><th>BODY</th><th>CREATED AT</th><th class='text-center'>ACTIONS</th>
+		  	</tr>
+	  	</thead>
+	  	<tbody>
+		  	<%@posts.each do |post|%>
+			  	<tr>
+			  		<td><%=post.email%></td>
+			  		<td> <%= post.title%></td>
+			  		<td> <%= post.body%></td>
+			  		<td><i><%=time_ago_in_words(post.created_at)%> ago</i></td>
+			  		<td><%=link_to "SHOW POST",post_path(post.id), class: "btn btn-primary btn-xs"%>
+				  	<%=link_to "EDIT POST",edit_post_path(post.id), class: "btn btn-info btn-xs"%>
+				  	<%= link_to "DELETE POST", post_path(post.id), method: :DELETE, data: {confirm:"Are you sure you want to DELETE it???"}, class: "btn btn-default btn-xs"%></td>
+
+			  	</tr>
+			<%end%>
+		</tbody>
+	</table>
+	<%=link_to "BACK",:back%>
+</div>

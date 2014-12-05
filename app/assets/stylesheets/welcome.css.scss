@@ -1,0 +1,36 @@
+// Place all the styles related to the welcome controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.my-class{
+	color:red;
+}
+.welcome_page{
+		background-color: #16E6ED;
+		padding-top: 10px;
+		padding-bottom: 10px;
+
+	.top_margin{
+		margin-top: 50px;
+	}
+
+	.custom_label{
+		color: #131C9F;
+	}
+
+	.custom_text{
+		background-color: #FAF6B6;
+		color: red;
+	}
+
+	.custom_submit{
+		background-color: red;
+		color: white;
+	}
+
+	#copy_button{
+		background-color: green;
+		color: white;
+	}
+	
+}
+
