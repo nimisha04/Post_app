@@ -11,10 +11,10 @@ class WelcomeController < ApplicationController
 		@post=Post.find_by(id:params[:post_id])
 		@comments=@post.comments.pluck(:id)
 		puts @comments
-		# render js:@comments
+		
 		respond_to do |format|
 			format.html
-			# format.js{render "abc.js.erb"}
+		
 			format.json{render :json => @comments}
 		end
 	end
