@@ -11,7 +11,6 @@ class WelcomeController < ApplicationController
 		@post=Post.find_by(id:params[:post_id])
 		@comments=@post.comments.pluck(:id)
 		puts @comments
-		
 		respond_to do |format|
 			format.html
 		
